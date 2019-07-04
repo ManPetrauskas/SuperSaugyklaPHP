@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
         editTextHeroId = (EditText) findViewById(R.id.editTextHeroId);
         editTextName = (EditText) findViewById(R.id.editTextName);
-        editTextRealname = (EditText) findViewById(R.id.editTextRealname);
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        spinnerTeam = (Spinner) findViewById(R.id.spinnerTeamAffiliation);
+//        editTextRealname = (EditText) findViewById(R.id.editTextRealname);
+//        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+//        spinnerTeam = (Spinner) findViewById(R.id.spinnerTeamAffiliation);
 
         buttonAddUpdate = (Button) findViewById(R.id.buttonAddUpdate);
 
