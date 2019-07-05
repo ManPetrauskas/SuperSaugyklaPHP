@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getTodaysHours(){
-        PerformNetworkRequestClone updatehours = new PerformNetworkRequestClone(Api.URL_UPDATE_TODAYSHOURS, null);
+        PerformNetworkRequestClone updatehours = new PerformNetworkRequestClone(Api.URL_UPDATE_TODAYSHOURS, null, CODE_GET_QUERY);
         updatehours.execute();
 
         String id = editTextName.getText().toString();
@@ -199,9 +199,10 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> params;
         int requestCode;
 
-        PerformNetworkRequestClone(String url, HashMap<String, String> params) {
+        PerformNetworkRequestClone(String url, HashMap<String, String> params, int requestCode) {
             this.url = url;
             this.params = params;
+            this.requestCode = requestCode;
         }
 
         @Override
@@ -236,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
             if (requestCode == CODE_GET_REQUEST)
                 return requestHandler.sendGetRequest(url);
 
-            if(requestCode == CODE_GET_QUERY)
+            if (requestCode == CODE_GET_QUERY)
                 return requestHandler.sendUpdateRequest(url,params);
 
             return null;
