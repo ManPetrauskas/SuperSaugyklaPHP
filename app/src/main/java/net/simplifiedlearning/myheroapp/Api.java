@@ -12,5 +12,7 @@ public class Api {
     public static final String URL_READ_HEROES = ROOT_URL + "getheroes";
     public static final String URL_UPDATE_HERO = ROOT_URL + "updatehero";
     public static final String URL_DELETE_HERO = ROOT_URL + "deletehero&id=";
+    public static final String URL_GET_TODAYSHOURS = ROOT_URL + "gettodayshours";
+    public static final String URL_UPDATE_TODAYSHOURS = ROOT_URL + "updatetodayshours";
 
 }

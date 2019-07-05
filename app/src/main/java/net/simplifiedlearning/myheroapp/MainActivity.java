@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int CODE_GET_REQUEST = 1024;
     private static final int CODE_POST_REQUEST = 1025;
+//    private static final int CODE_GET_QUERY = 0;
 
     EditText editTextHeroId, editTextName, editTextRealname;
     RatingBar ratingBar;
@@ -67,14 +68,15 @@ public class MainActivity extends AppCompatActivity {
         buttonAddUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isUpdating) {
-                    updateHero();
-                } else {
-                    createHero();
-                }
+//                if (isUpdating) {
+//                    updateHero();
+//                } else {
+//                    createHero();
+//                }
+                getTodaysHours();
             }
         });
-        readHeroes();
+        //readHeroes();
     }
 
 
@@ -111,6 +113,18 @@ public class MainActivity extends AppCompatActivity {
     private void readHeroes() {
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_READ_HEROES, null, CODE_GET_REQUEST);
         request.execute();
+    }
+
+    private void getTodaysHours(){
+        PerformNetworkRequestClone updatehours = new PerformNetworkRequestClone(Api.URL_UPDATE_TODAYSHOURS, null);
+        updatehours.execute();
+
+        String id = editTextName.getText().toString();
+
+//        HashMap<String, String> params = new HashMap<>();
+//        params.put("login_token", id);
+//        updatehours = new PerformNetworkRequest(Api.URL_GET_TODAYSHOURS, params, CODE_POST_REQUEST);
+//        updatehours.execute();
     }
 
     private void updateHero() {
@@ -178,6 +192,55 @@ public class MainActivity extends AppCompatActivity {
 
         HeroAdapter adapter = new HeroAdapter(heroList);
         listView.setAdapter(adapter);
+    }
+
+    private class PerformNetworkRequestClone extends AsyncTask<Void, Void, String> {
+        String url;
+        HashMap<String, String> params;
+        int requestCode;
+
+        PerformNetworkRequestClone(String url, HashMap<String, String> params) {
+            this.url = url;
+            this.params = params;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            progressBar.setVisibility(GONE);
+            try {
+                JSONObject object = new JSONObject(s);
+                if (!object.getBoolean("error")) {
+                    Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
+                    refreshHeroList(object.getJSONArray("heroes"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestHandler requestHandler = new RequestHandler();
+
+            if (requestCode == CODE_POST_REQUEST)
+                return requestHandler.sendPostRequest(url, params);
+
+
+            if (requestCode == CODE_GET_REQUEST)
+                return requestHandler.sendGetRequest(url);
+
+//            if(requestCode == CODE_GET_QUERY)
+//                return requestHandler.send
+
+            return null;
+        }
     }
 
     private class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
