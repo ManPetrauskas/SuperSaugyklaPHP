@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
                 return requestHandler.sendGetRequest(url);
 
             if (requestCode == CODE_GET_QUERY)
-                return requestHandler.sendUpdateRequest(url,params);
+                return requestHandler.sendUpdateRequest(url);
 
             return null;
         }
