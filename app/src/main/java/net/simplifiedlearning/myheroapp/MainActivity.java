@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getTodaysHours(){
-        PerformNetworkRequestClone updatehours = new PerformNetworkRequestClone(Api.URL_UPDATE_TODAYSHOURS, null, CODE_GET_QUERY);
-        updatehours.execute();
+//        PerformNetworkRequestClone updatehours = new PerformNetworkRequestClone(Api.URL_UPDATE_TODAYSHOURS, null, CODE_GET_QUERY);
+//        updatehours.execute();
 
         String id = editTextName.getText().toString();
 
