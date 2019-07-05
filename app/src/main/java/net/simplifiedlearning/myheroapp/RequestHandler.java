@@ -74,6 +74,46 @@ public class RequestHandler {
         }
         return sb.toString();
     }
+    public String sendUpdateRequest(String requestURL,
+                                  HashMap<String, String> postDataParams) {
+        //Creating a URL
+        URL url;
+
+        //StringBuilder object to store the message retrieved from the server
+        StringBuilder sb = new StringBuilder();
+        try {
+            //Initializing Url
+            url = new URL(requestURL);
+
+            //Creating an httmlurl connection
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            //Configuring connection properties
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(false);
+
+            //Creating an output stream
+            OutputStream os = conn.getOutputStream();
+
+            //Writing parameters to the request
+            //We are using a method getPostDataString which is defined below
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(getPostDataString(postDataParams));
+
+            writer.flush();
+            writer.close();
+            os.close();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
+    }
 
     public String sendGetRequest(String requestURL) {
         StringBuilder sb = new StringBuilder();

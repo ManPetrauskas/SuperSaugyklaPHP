@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int CODE_GET_REQUEST = 1024;
     private static final int CODE_POST_REQUEST = 1025;
-//    private static final int CODE_GET_QUERY = 0;
+    private static final int CODE_GET_QUERY = 1026;
 
     EditText editTextHeroId, editTextName, editTextRealname;
     RatingBar ratingBar;
@@ -236,8 +236,8 @@ public class MainActivity extends AppCompatActivity {
             if (requestCode == CODE_GET_REQUEST)
                 return requestHandler.sendGetRequest(url);
 
-//            if(requestCode == CODE_GET_QUERY)
-//                return requestHandler.send
+            if(requestCode == CODE_GET_QUERY)
+                return requestHandler.sendUpdateRequest(url,params);
 
             return null;
         }
