@@ -14,5 +14,9 @@ public class Api {
     public static final String URL_DELETE_HERO = ROOT_URL + "deletehero&id=";
     public static final String URL_GET_TODAYSHOURS = ROOT_URL + "gettodayshours";
     public static final String URL_UPDATE_TODAYSHOURS = ROOT_URL + "updatetodayshours";
+    public static final String URL_GET_WORKERBOOLEAN = ROOT_URL + "getworkersboolean&login_token=";
+    public static final String URL_READ_WORKERS = ROOT_URL + "getworkers";
+    public static final String URL_CHANGE_BOOLEANTOTRUE = ROOT_URL + "changebooleantotrue";
+    public static final String URL_CHANGE_BOOLEANTOFALSE = ROOT_URL + "changebooleantofalse";
 
 }

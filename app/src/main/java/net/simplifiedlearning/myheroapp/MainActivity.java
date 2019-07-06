@@ -77,7 +77,9 @@ public class MainActivity extends AppCompatActivity {
 //                } else {
 //                    createHero();
 //                }
-                getTodaysHours();
+                //getWorkerBoolean();
+                //changeBooleanToFalse();
+                changeBooleanToTrue();
             }
         });
         //readHeroes();
@@ -114,20 +116,20 @@ public class MainActivity extends AppCompatActivity {
         request.execute();
     }
 
-    private void readHeroes() {
-        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_READ_HEROES, null, CODE_GET_REQUEST);
+    private void readWorkers() {
+        PerformNetworkRequestClone request = new PerformNetworkRequestClone(Api.URL_READ_WORKERS, null, CODE_GET_QUERY);
         request.execute();
     }
 
     private void getTodaysHours(){
-//        PerformNetworkRequestClone updatehours = new PerformNetworkRequestClone(Api.URL_UPDATE_TODAYSHOURS, null, CODE_GET_QUERY);
-//        updatehours.execute();
+//       PerformNetworkRequestClone updatehours = new PerformNetworkRequestClone(Api.URL_UPDATE_TODAYSHOURS, null, CODE_GET_QUERY);
+//       updatehours.execute();
 
         String id = editTextName.getText().toString();
 
         HashMap<String, String> params = new HashMap<>();
         params.put("login_token", id);
-        PerformNetworkRequest todayshours = new PerformNetworkRequest(Api.URL_GET_TODAYSHOURS, params, CODE_POST_REQUEST);
+        PerformNetworkRequestClone todayshours = new PerformNetworkRequestClone(Api.URL_GET_TODAYSHOURS, params, CODE_POST_REQUEST);
         todayshours.execute();
     }
 
@@ -178,6 +180,35 @@ public class MainActivity extends AppCompatActivity {
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_DELETE_HERO + id, null, CODE_GET_REQUEST);
         request.execute();
     }
+
+    private void changeBooleanToTrue(){
+        String login_token = editTextName.getText().toString().trim();
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login_token", login_token);
+
+        PerformNetworkRequestClone request = new PerformNetworkRequestClone(Api.URL_CHANGE_BOOLEANTOTRUE, params, CODE_POST_REQUEST);
+        request.execute();
+    }
+
+    private void changeBooleanToFalse(){
+        String login_token = editTextName.getText().toString().trim();
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login_token", login_token);
+
+        PerformNetworkRequestClone request = new PerformNetworkRequestClone(Api.URL_CHANGE_BOOLEANTOFALSE, params, CODE_POST_REQUEST);
+        request.execute();
+    }
+
+    private void getWorkerBoolean(){          //veikia
+        String login_token = editTextName.getText().toString().trim();
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login_token", login_token);
+
+        PerformNetworkRequestClone request = new PerformNetworkRequestClone(Api.URL_GET_WORKERBOOLEAN + login_token, params, CODE_POST_REQUEST);
+        request.execute();
+    }
+
+
 
     private void refreshHeroList(JSONArray heroes) throws JSONException {
         heroList.clear();
