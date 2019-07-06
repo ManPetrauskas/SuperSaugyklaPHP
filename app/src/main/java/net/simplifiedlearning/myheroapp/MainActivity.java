@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
         PerformNetworkRequestClone request = new PerformNetworkRequestClone(Api.URL_GET_WORKERBOOLEAN + login_token, params, CODE_POST_REQUEST);
         request.execute();
     }
-    private void lounchUser(){
+    private void launchUser(){
         Intent intent = new Intent(this, user.class);
         startActivity(intent);
     }
@@ -288,11 +288,11 @@ public class MainActivity extends AppCompatActivity {
                 atsList+=(m.group());
             }
             System.out.println(atsList);
-            if(atsList=="0" || atsList=="1"){
-                lounchUser();
+            if(atsList.equals("0") || atsList.equals("1")){
+                launchUser();
             }
             else{
-                System.out.println(atsList+" is not 0 or 1... Such token dosnt exist ?");
+                System.out.println(atsList+" is not 0 or 1... Such token doesnt exist ?");
             }
         }
 
