@@ -27,6 +27,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static android.view.View.GONE;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     Button buttonAddUpdate;
 
     List<Hero> heroList;
+    List<String> atsList;
 
     boolean isUpdating = false;
 
@@ -56,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 //        editTextRealname = (EditText) findViewById(R.id.editTextRealname);
 //        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 //        spinnerTeam = (Spinner) findViewById(R.id.spinnerTeamAffiliation);
-
+        atsList = new ArrayList<String>();
         buttonAddUpdate = (Button) findViewById(R.id.buttonAddUpdate);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -214,7 +218,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            System.out.println(s);
+            Matcher m = Pattern.compile("(?<=:).*(?=})").matcher(s);
+            while (m.find()) {
+                atsList.add(m.group());
+            }
+            System.out.println(atsList);
             progressBar.setVisibility(GONE);
             try {
                 JSONObject object = new JSONObject(s);
