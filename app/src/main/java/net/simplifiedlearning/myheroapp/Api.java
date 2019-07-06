@@ -18,5 +18,7 @@ public class Api {
     public static final String URL_READ_WORKERS = ROOT_URL + "getworkers";
     public static final String URL_CHANGE_BOOLEANTOTRUE = ROOT_URL + "changebooleantotrue";
     public static final String URL_CHANGE_BOOLEANTOFALSE = ROOT_URL + "changebooleantofalse";
+    public static final String URL_CHANGE_LASTTIMESTARTED = ROOT_URL + "changelasttimestarted";
+    public static final String URL_CHANGE_LASTTIMEENDED = ROOT_URL + "changelasttimeended";
 
 }

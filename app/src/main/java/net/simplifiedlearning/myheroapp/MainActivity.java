@@ -79,7 +79,9 @@ public class MainActivity extends AppCompatActivity {
 //                }
                 //getWorkerBoolean();
                 //changeBooleanToFalse();
-                changeBooleanToTrue();
+                //changeBooleanToTrue();
+                //changeLastTimeStarted();
+                changeLastTimeEnded();
             }
         });
         //readHeroes();
@@ -114,6 +116,24 @@ public class MainActivity extends AppCompatActivity {
 
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_HERO, params, CODE_POST_REQUEST);
         request.execute();
+    }
+
+    private void changeLastTimeStarted(){
+        String id = editTextName.getText().toString();
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login_token", id);
+        PerformNetworkRequestClone todayshours = new PerformNetworkRequestClone(Api.URL_CHANGE_LASTTIMESTARTED, params, CODE_POST_REQUEST);
+        todayshours.execute();
+    }
+
+    private void changeLastTimeEnded(){
+        String id = editTextName.getText().toString();
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login_token", id);
+        PerformNetworkRequestClone todayshours = new PerformNetworkRequestClone(Api.URL_CHANGE_LASTTIMEENDED, params, CODE_POST_REQUEST);
+        todayshours.execute();
     }
 
     private void readWorkers() {
