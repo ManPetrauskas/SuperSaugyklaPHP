@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Matcher m = Pattern.compile("(?<=:).*(?=})").matcher(s);
+            Matcher m = Pattern.compile("/(?<=:).*(?=})/g").matcher(s);
             while (m.find()) {
                 atsList.add(m.group());
             }
