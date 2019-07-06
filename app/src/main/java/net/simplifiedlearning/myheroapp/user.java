@@ -77,14 +77,14 @@ public class user extends AppCompatActivity {
     }
 
     private void getTodaysHours(){
-//       PerformNetworkRequestClone updatehours = new PerformNetworkRequestClone(Api.URL_UPDATE_TODAYSHOURS, null, CODE_GET_QUERY);
+//       PerformNetworkRequestClone updatehours = new PerformNetworkRequestClone(Api.URL_UPDATE_TODAYSWORKTIME, null, CODE_GET_QUERY);
 //       updatehours.execute();
 
         String id = editTextName.getText().toString();
 
         HashMap<String, String> params = new HashMap<>();
         params.put("login_token", id);
-        user.PerformNetworkRequestClone todayshours = new user.PerformNetworkRequestClone(Api.URL_GET_TODAYSHOURS, params, CODE_POST_REQUEST);
+        user.PerformNetworkRequestClone todayshours = new user.PerformNetworkRequestClone(Api.URL_GET_TODAYSWORKTIME, params, CODE_POST_REQUEST);
         todayshours.execute();
     }
 
