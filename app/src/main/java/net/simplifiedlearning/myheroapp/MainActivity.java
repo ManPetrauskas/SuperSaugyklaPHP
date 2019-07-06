@@ -214,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            System.out.println(s);
             progressBar.setVisibility(GONE);
             try {
                 JSONObject object = new JSONObject(s);
