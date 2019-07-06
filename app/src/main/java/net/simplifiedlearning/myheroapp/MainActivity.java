@@ -82,10 +82,10 @@ public class MainActivity extends AppCompatActivity {
                 //changeBooleanToFalse();
                 //changeBooleanToTrue();
                 //changeLastTimeStarted();
-                changeLastTimeEnded();
+                //changeLastTimeEnded();
 
 
-                // ============ To open user=============
+                // ============ To open user=============(comment everything below before testing any other method)
                 String login_token = editTextName.getText().toString().trim();
                 HashMap<String, String> params = new HashMap<>();
                 params.put("login_token", login_token);
