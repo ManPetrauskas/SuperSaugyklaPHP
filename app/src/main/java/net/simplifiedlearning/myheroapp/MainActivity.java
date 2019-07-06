@@ -1,6 +1,7 @@
 package net.simplifiedlearning.myheroapp;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -82,6 +83,16 @@ public class MainActivity extends AppCompatActivity {
                 //changeBooleanToTrue();
                 //changeLastTimeStarted();
                 changeLastTimeEnded();
+
+
+                // ============ To open user=============
+                String login_token = editTextName.getText().toString().trim();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("login_token", login_token);
+
+                PerformNetworkRequestToOpenUser request = new PerformNetworkRequestToOpenUser(Api.URL_GET_WORKERBOOLEAN + login_token, params, CODE_POST_REQUEST);
+                request.execute();
+                //=========================================
             }
         });
         //readHeroes();
@@ -227,6 +238,10 @@ public class MainActivity extends AppCompatActivity {
         PerformNetworkRequestClone request = new PerformNetworkRequestClone(Api.URL_GET_WORKERBOOLEAN + login_token, params, CODE_POST_REQUEST);
         request.execute();
     }
+    private void lounchUser(){
+        Intent intent = new Intent(this, user.class);
+        startActivity(intent);
+    }
 
 
 
@@ -247,6 +262,56 @@ public class MainActivity extends AppCompatActivity {
 
         HeroAdapter adapter = new HeroAdapter(heroList);
         listView.setAdapter(adapter);
+    }
+    private class PerformNetworkRequestToOpenUser extends AsyncTask<Void, Void, String> {
+        String url;
+        HashMap<String, String> params;
+        int requestCode;
+
+        PerformNetworkRequestToOpenUser(String url, HashMap<String, String> params, int requestCode) {
+            this.url = url;
+            this.params = params;
+            this.requestCode = requestCode;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Matcher m = Pattern.compile("[0-9]").matcher(s);
+            while (m.find()) {
+                atsList+=(m.group());
+            }
+            System.out.println(atsList);
+            if(atsList=="0" || atsList=="1"){
+                lounchUser();
+            }
+            else{
+                System.out.println(atsList+" is not 0 or 1... Such token dosnt exist ?");
+            }
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestHandler requestHandler = new RequestHandler();
+
+            if (requestCode == CODE_POST_REQUEST)
+                return requestHandler.sendPostRequest(url, params);
+
+
+            if (requestCode == CODE_GET_REQUEST)
+                return requestHandler.sendGetRequest(url);
+
+            if (requestCode == CODE_GET_QUERY)
+                return requestHandler.sendUpdateRequest(url);
+
+            return null;
+        }
     }
 
     private class PerformNetworkRequestClone extends AsyncTask<Void, Void, String> {
