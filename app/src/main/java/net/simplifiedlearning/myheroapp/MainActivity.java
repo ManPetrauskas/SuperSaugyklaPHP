@@ -116,15 +116,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getTodaysHours(){
-        PerformNetworkRequestClone updatehours = new PerformNetworkRequestClone(Api.URL_UPDATE_TODAYSHOURS, null, CODE_GET_QUERY);
-        updatehours.execute();
+//        PerformNetworkRequestClone updatehours = new PerformNetworkRequestClone(Api.URL_UPDATE_TODAYSHOURS, null, CODE_GET_QUERY);
+//        updatehours.execute();
 
         String id = editTextName.getText().toString();
 
-//        HashMap<String, String> params = new HashMap<>();
-//        params.put("login_token", id);
-//        updatehours = new PerformNetworkRequest(Api.URL_GET_TODAYSHOURS, params, CODE_POST_REQUEST);
-//        updatehours.execute();
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login_token", id);
+        PerformNetworkRequest todayshours = new PerformNetworkRequest(Api.URL_GET_TODAYSHOURS, params, CODE_POST_REQUEST);
+        todayshours.execute();
     }
 
     private void updateHero() {
