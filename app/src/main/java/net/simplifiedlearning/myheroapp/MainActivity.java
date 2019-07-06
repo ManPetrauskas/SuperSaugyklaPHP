@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     Button buttonAddUpdate;
 
     List<Hero> heroList;
-    List<String> atsList;
+    String atsList;
 
     boolean isUpdating = false;
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 //        editTextRealname = (EditText) findViewById(R.id.editTextRealname);
 //        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 //        spinnerTeam = (Spinner) findViewById(R.id.spinnerTeamAffiliation);
-        atsList = new ArrayList<String>();
+        atsList = "";
         buttonAddUpdate = (Button) findViewById(R.id.buttonAddUpdate);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(s);
             Matcher m = Pattern.compile("[0-9]").matcher(s);
             while (m.find()) {
-                atsList.add(m.group());
+                atsList+=(m.group());
             }
             System.out.println(atsList);
             progressBar.setVisibility(GONE);
