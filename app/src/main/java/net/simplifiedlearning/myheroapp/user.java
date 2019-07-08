@@ -36,7 +36,8 @@ public class user extends AppCompatActivity {
     private static final int CODE_POST_REQUEST = 1025;
     private static final int CODE_GET_QUERY = 1026;
 
-    EditText editTextHeroId, editTextName, editTextRealname;
+    EditText  editTextName;
+    //editTextHeroId,, editTextRealname
     RatingBar ratingBar;
     Spinner spinnerTeam;
     ProgressBar progressBar;
@@ -45,6 +46,7 @@ public class user extends AppCompatActivity {
 
     List<Hero> heroList;
     String atsList;
+    String userToken;
 
     boolean isUpdating = false;
 
@@ -52,21 +54,22 @@ public class user extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        userToken=MainActivity.userToken;
     }
     private void changeLastTimeStarted(){
-        String id = editTextName.getText().toString();
+        //String id = editTextName.getText().toString();
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("login_token", id);
+        params.put("login_token", userToken);
         user.PerformNetworkRequestClone todayshours = new user.PerformNetworkRequestClone(Api.URL_CHANGE_LASTTIMESTARTED, params, CODE_POST_REQUEST);
         todayshours.execute();
     }
 
     private void changeLastTimeEnded(){
-        String id = editTextName.getText().toString();
+//        String id = editTextName.getText().toString();
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("login_token", id);
+        params.put("login_token", userToken);
         user.PerformNetworkRequestClone todayshours = new user.PerformNetworkRequestClone(Api.URL_CHANGE_LASTTIMEENDED, params, CODE_POST_REQUEST);
         todayshours.execute();
     }
@@ -80,56 +83,56 @@ public class user extends AppCompatActivity {
 //       PerformNetworkRequestClone updatehours = new PerformNetworkRequestClone(Api.URL_UPDATE_TODAYSWORKTIME, null, CODE_GET_QUERY);
 //       updatehours.execute();
 
-        String id = editTextName.getText().toString();
+//        String id = editTextName.getText().toString();
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("login_token", id);
+        params.put("login_token", userToken);
         user.PerformNetworkRequestClone todayshours = new user.PerformNetworkRequestClone(Api.URL_GET_TODAYSWORKTIME, params, CODE_POST_REQUEST);
         todayshours.execute();
     }
 
-    private void updateHero() {
-        String id = editTextHeroId.getText().toString();
-        String name = editTextName.getText().toString().trim();
-        String realname = editTextRealname.getText().toString().trim();
-
-        int rating = (int) ratingBar.getRating();
-
-        String team = spinnerTeam.getSelectedItem().toString();
-
-
-        if (TextUtils.isEmpty(name)) {
-            editTextName.setError("Please enter name");
-            editTextName.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(realname)) {
-            editTextRealname.setError("Please enter real name");
-            editTextRealname.requestFocus();
-            return;
-        }
-
-        HashMap<String, String> params = new HashMap<>();
-        params.put("id", id);
-        params.put("name", name);
-        params.put("realname", realname);
-        params.put("rating", String.valueOf(rating));
-        params.put("teamaffiliation", team);
-
-
-        user.PerformNetworkRequest request = new user.PerformNetworkRequest(Api.URL_UPDATE_HERO, params, CODE_POST_REQUEST);
-        request.execute();
-
-        buttonAddUpdate.setText("Add");
-
-        editTextName.setText("");
-        editTextRealname.setText("");
-        ratingBar.setRating(0);
-        spinnerTeam.setSelection(0);
-
-        isUpdating = false;
-    }
+//    private void updateHero() {
+//        String id = editTextHeroId.getText().toString();
+//        String name = editTextName.getText().toString().trim();
+//        String realname = editTextRealname.getText().toString().trim();
+//
+//        int rating = (int) ratingBar.getRating();
+//
+//        String team = spinnerTeam.getSelectedItem().toString();
+//
+//
+//        if (TextUtils.isEmpty(name)) {
+//            editTextName.setError("Please enter name");
+//            editTextName.requestFocus();
+//            return;
+//        }
+//
+//        if (TextUtils.isEmpty(realname)) {
+//            editTextRealname.setError("Please enter real name");
+//            editTextRealname.requestFocus();
+//            return;
+//        }
+//
+//        HashMap<String, String> params = new HashMap<>();
+//        params.put("id", id);
+//        params.put("name", name);
+//        params.put("realname", realname);
+//        params.put("rating", String.valueOf(rating));
+//        params.put("teamaffiliation", team);
+//
+//
+//        user.PerformNetworkRequest request = new user.PerformNetworkRequest(Api.URL_UPDATE_HERO, params, CODE_POST_REQUEST);
+//        request.execute();
+//
+//        buttonAddUpdate.setText("Add");
+//
+//        editTextName.setText("");
+//        editTextRealname.setText("");
+//        ratingBar.setRating(0);
+//        spinnerTeam.setSelection(0);
+//
+//        isUpdating = false;
+//    }
 
     private void deleteHero(int id) {
         user.PerformNetworkRequest request = new user.PerformNetworkRequest(Api.URL_DELETE_HERO + id, null, CODE_GET_REQUEST);
@@ -137,29 +140,29 @@ public class user extends AppCompatActivity {
     }
 
     private void changeBooleanToTrue(){
-        String login_token = editTextName.getText().toString().trim();
+//        String login_token = editTextName.getText().toString().trim();
         HashMap<String, String> params = new HashMap<>();
-        params.put("login_token", login_token);
+        params.put("login_token", userToken);
 
         user.PerformNetworkRequestClone request = new user.PerformNetworkRequestClone(Api.URL_CHANGE_BOOLEANTOTRUE, params, CODE_POST_REQUEST);
         request.execute();
     }
 
     private void changeBooleanToFalse(){
-        String login_token = editTextName.getText().toString().trim();
+//        String login_token = editTextName.getText().toString().trim();
         HashMap<String, String> params = new HashMap<>();
-        params.put("login_token", login_token);
+        params.put("login_token", userToken);
 
         user.PerformNetworkRequestClone request = new user.PerformNetworkRequestClone(Api.URL_CHANGE_BOOLEANTOFALSE, params, CODE_POST_REQUEST);
         request.execute();
     }
 
     private void getWorkerBoolean(){          //veikia
-        String login_token = editTextName.getText().toString().trim();
+//        String login_token = editTextName.getText().toString().trim();
         HashMap<String, String> params = new HashMap<>();
-        params.put("login_token", login_token);
+        params.put("login_token", userToken);
 
-        user.PerformNetworkRequestClone request = new user.PerformNetworkRequestClone(Api.URL_GET_WORKERBOOLEAN + login_token, params, CODE_POST_REQUEST);
+        user.PerformNetworkRequestClone request = new user.PerformNetworkRequestClone(Api.URL_GET_WORKERBOOLEAN + userToken, params, CODE_POST_REQUEST);
         request.execute();
     }
 
@@ -313,9 +316,9 @@ public class user extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     isUpdating = true;
-                    editTextHeroId.setText(String.valueOf(hero.getId()));
+//                    editTextHeroId.setText(String.valueOf(hero.getId()));
                     editTextName.setText(hero.getName());
-                    editTextRealname.setText(hero.getRealname());
+//                    editTextRealname.setText(hero.getRealname());
                     ratingBar.setRating(hero.getRating());
                     spinnerTeam.setSelection(((ArrayAdapter<String>) spinnerTeam.getAdapter()).getPosition(hero.getTeamaffiliation()));
                     buttonAddUpdate.setText("Update");

@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int CODE_POST_REQUEST = 1025;
     private static final int CODE_GET_QUERY = 1026;
 
-    EditText editTextHeroId, editTextName, editTextRealname;
+    EditText  editTextName;
+    //editTextHeroId,, editTextRealname
     RatingBar ratingBar;
     Spinner spinnerTeam;
     ProgressBar progressBar;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     List<Hero> heroList;
     String atsList;
+    public static String userToken;
 
     boolean isUpdating = false;
 
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editTextHeroId = (EditText) findViewById(R.id.editTextHeroId);
+        //editTextHeroId = (EditText) findViewById(R.id.editTextHeroId);
         editTextName = (EditText) findViewById(R.id.editTextName);
 //        editTextRealname = (EditText) findViewById(R.id.editTextRealname);
 //        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         buttonAddUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                userToken = editTextName.getText().toString();
 //                if (isUpdating) {
 //                    updateHero();
 //                } else {
@@ -100,50 +103,50 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void createHero() {
-        String name = editTextName.getText().toString().trim();
-        String realname = editTextRealname.getText().toString().trim();
-
-        int rating = (int) ratingBar.getRating();
-
-        String team = spinnerTeam.getSelectedItem().toString();
-
-        if (TextUtils.isEmpty(name)) {
-            editTextName.setError("Please enter name");
-            editTextName.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(realname)) {
-            editTextRealname.setError("Please enter real name");
-            editTextRealname.requestFocus();
-            return;
-        }
-
-        HashMap<String, String> params = new HashMap<>();
-        params.put("name", name);
-        params.put("realname", realname);
-        params.put("rating", String.valueOf(rating));
-        params.put("teamaffiliation", team);
-
-        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_HERO, params, CODE_POST_REQUEST);
-        request.execute();
-    }
+//    private void createHero() {
+//        String name = editTextName.getText().toString().trim();
+//        String realname = editTextRealname.getText().toString().trim();
+//
+//        int rating = (int) ratingBar.getRating();
+//
+//        String team = spinnerTeam.getSelectedItem().toString();
+//
+//        if (TextUtils.isEmpty(name)) {
+//            editTextName.setError("Please enter name");
+//            editTextName.requestFocus();
+//            return;
+//        }
+//
+//        if (TextUtils.isEmpty(realname)) {
+//            editTextRealname.setError("Please enter real name");
+//            editTextRealname.requestFocus();
+//            return;
+//        }
+//
+//        HashMap<String, String> params = new HashMap<>();
+//        params.put("name", name);
+//        params.put("realname", realname);
+//        params.put("rating", String.valueOf(rating));
+//        params.put("teamaffiliation", team);
+//
+//        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_HERO, params, CODE_POST_REQUEST);
+//        request.execute();
+//    }
 
     private void changeLastTimeStarted(){
-        String id = editTextName.getText().toString();
+        //String id = editTextName.getText().toString();
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("login_token", id);
+        params.put("login_token", userToken);
         PerformNetworkRequestClone todayshours = new PerformNetworkRequestClone(Api.URL_CHANGE_LASTTIMESTARTED, params, CODE_POST_REQUEST);
         todayshours.execute();
     }
 
     private void changeLastTimeEnded(){
-        String id = editTextName.getText().toString();
+        //String id = editTextName.getText().toString();
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("login_token", id);
+        params.put("login_token", userToken);
         PerformNetworkRequestClone todayshours = new PerformNetworkRequestClone(Api.URL_CHANGE_LASTTIMEENDED, params, CODE_POST_REQUEST);
         todayshours.execute();
     }
@@ -165,48 +168,48 @@ public class MainActivity extends AppCompatActivity {
 //        todayshours.execute();
     }
 
-    private void updateHero() {
-        String id = editTextHeroId.getText().toString();
-        String name = editTextName.getText().toString().trim();
-        String realname = editTextRealname.getText().toString().trim();
-
-        int rating = (int) ratingBar.getRating();
-
-        String team = spinnerTeam.getSelectedItem().toString();
-
-
-        if (TextUtils.isEmpty(name)) {
-            editTextName.setError("Please enter name");
-            editTextName.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(realname)) {
-            editTextRealname.setError("Please enter real name");
-            editTextRealname.requestFocus();
-            return;
-        }
-
-        HashMap<String, String> params = new HashMap<>();
-        params.put("id", id);
-        params.put("name", name);
-        params.put("realname", realname);
-        params.put("rating", String.valueOf(rating));
-        params.put("teamaffiliation", team);
-
-
-        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_UPDATE_HERO, params, CODE_POST_REQUEST);
-        request.execute();
-
-        buttonAddUpdate.setText("Add");
-
-        editTextName.setText("");
-        editTextRealname.setText("");
-        ratingBar.setRating(0);
-        spinnerTeam.setSelection(0);
-
-        isUpdating = false;
-    }
+//    private void updateHero() {
+//        String id = editTextHeroId.getText().toString();
+//        String name = editTextName.getText().toString().trim();
+//        String realname = editTextRealname.getText().toString().trim();
+//
+//        int rating = (int) ratingBar.getRating();
+//
+//        String team = spinnerTeam.getSelectedItem().toString();
+//
+//
+//        if (TextUtils.isEmpty(name)) {
+//            editTextName.setError("Please enter name");
+//            editTextName.requestFocus();
+//            return;
+//        }
+//
+//        if (TextUtils.isEmpty(realname)) {
+//            editTextRealname.setError("Please enter real name");
+//            editTextRealname.requestFocus();
+//            return;
+//        }
+//
+//        HashMap<String, String> params = new HashMap<>();
+//        params.put("id", id);
+//        params.put("name", name);
+//        params.put("realname", realname);
+//        params.put("rating", String.valueOf(rating));
+//        params.put("teamaffiliation", team);
+//
+//
+//        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_UPDATE_HERO, params, CODE_POST_REQUEST);
+//        request.execute();
+//
+//        buttonAddUpdate.setText("Add");
+//
+//        editTextName.setText("");
+//        editTextRealname.setText("");
+//        ratingBar.setRating(0);
+//        spinnerTeam.setSelection(0);
+//
+//        isUpdating = false;
+//    }
 
     private void deleteHero(int id) {
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_DELETE_HERO + id, null, CODE_GET_REQUEST);
@@ -444,9 +447,9 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     isUpdating = true;
-                    editTextHeroId.setText(String.valueOf(hero.getId()));
+//                    editTextHeroId.setText(String.valueOf(hero.getId()));
                     editTextName.setText(hero.getName());
-                    editTextRealname.setText(hero.getRealname());
+//                    editTextRealname.setText(hero.getRealname());
                     ratingBar.setRating(hero.getRating());
                     spinnerTeam.setSelection(((ArrayAdapter<String>) spinnerTeam.getAdapter()).getPosition(hero.getTeamaffiliation()));
                     buttonAddUpdate.setText("Update");
