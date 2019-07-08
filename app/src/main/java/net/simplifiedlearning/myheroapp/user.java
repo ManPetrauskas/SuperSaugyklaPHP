@@ -57,8 +57,6 @@ public class user extends AppCompatActivity {
         userToken=MainActivity.userToken;
     }
     private void changeLastTimeStarted(){
-        //String id = editTextName.getText().toString();
-
         HashMap<String, String> params = new HashMap<>();
         params.put("login_token", userToken);
         user.PerformNetworkRequestClone todayshours = new user.PerformNetworkRequestClone(Api.URL_CHANGE_LASTTIMESTARTED, params, CODE_POST_REQUEST);
@@ -66,8 +64,6 @@ public class user extends AppCompatActivity {
     }
 
     private void changeLastTimeEnded(){
-//        String id = editTextName.getText().toString();
-
         HashMap<String, String> params = new HashMap<>();
         params.put("login_token", userToken);
         user.PerformNetworkRequestClone todayshours = new user.PerformNetworkRequestClone(Api.URL_CHANGE_LASTTIMEENDED, params, CODE_POST_REQUEST);
@@ -83,7 +79,6 @@ public class user extends AppCompatActivity {
 //       PerformNetworkRequestClone updatehours = new PerformNetworkRequestClone(Api.URL_UPDATE_TODAYSWORKTIME, null, CODE_GET_QUERY);
 //       updatehours.execute();
 
-//        String id = editTextName.getText().toString();
 
         HashMap<String, String> params = new HashMap<>();
         params.put("login_token", userToken);
@@ -140,7 +135,6 @@ public class user extends AppCompatActivity {
     }
 
     private void changeBooleanToTrue(){
-//        String login_token = editTextName.getText().toString().trim();
         HashMap<String, String> params = new HashMap<>();
         params.put("login_token", userToken);
 
@@ -149,7 +143,6 @@ public class user extends AppCompatActivity {
     }
 
     private void changeBooleanToFalse(){
-//        String login_token = editTextName.getText().toString().trim();
         HashMap<String, String> params = new HashMap<>();
         params.put("login_token", userToken);
 
@@ -158,7 +151,6 @@ public class user extends AppCompatActivity {
     }
 
     private void getWorkerBoolean(){          //veikia
-//        String login_token = editTextName.getText().toString().trim();
         HashMap<String, String> params = new HashMap<>();
         params.put("login_token", userToken);
 

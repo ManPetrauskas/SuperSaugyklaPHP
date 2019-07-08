@@ -134,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
     private void changeLastTimeStarted(){
-        //String id = editTextName.getText().toString();
 
         HashMap<String, String> params = new HashMap<>();
         params.put("login_token", userToken);
@@ -143,8 +142,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void changeLastTimeEnded(){
-        //String id = editTextName.getText().toString();
-
         HashMap<String, String> params = new HashMap<>();
         params.put("login_token", userToken);
         PerformNetworkRequestClone todayshours = new PerformNetworkRequestClone(Api.URL_CHANGE_LASTTIMEENDED, params, CODE_POST_REQUEST);
@@ -217,29 +214,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void changeBooleanToTrue(){
-        String login_token = editTextName.getText().toString().trim();
         HashMap<String, String> params = new HashMap<>();
-        params.put("login_token", login_token);
+        params.put("login_token", userToken);
 
         PerformNetworkRequestClone request = new PerformNetworkRequestClone(Api.URL_CHANGE_BOOLEANTOTRUE, params, CODE_POST_REQUEST);
         request.execute();
     }
 
     private void changeBooleanToFalse(){
-        String login_token = editTextName.getText().toString().trim();
         HashMap<String, String> params = new HashMap<>();
-        params.put("login_token", login_token);
+        params.put("login_token", userToken);
 
         PerformNetworkRequestClone request = new PerformNetworkRequestClone(Api.URL_CHANGE_BOOLEANTOFALSE, params, CODE_POST_REQUEST);
         request.execute();
     }
 
     private void getWorkerBoolean(){          //veikia
-        String login_token = editTextName.getText().toString().trim();
         HashMap<String, String> params = new HashMap<>();
-        params.put("login_token", login_token);
+        params.put("login_token", userToken);
 
-        PerformNetworkRequestClone request = new PerformNetworkRequestClone(Api.URL_GET_WORKERBOOLEAN + login_token, params, CODE_POST_REQUEST);
+        PerformNetworkRequestClone request = new PerformNetworkRequestClone(Api.URL_GET_WORKERBOOLEAN + userToken, params, CODE_POST_REQUEST);
         request.execute();
     }
     private void launchUser(){
