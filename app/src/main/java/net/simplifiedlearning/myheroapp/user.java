@@ -42,7 +42,7 @@ public class user extends AppCompatActivity {
     Spinner spinnerTeam;
     ProgressBar progressBar;
     ListView listView;
-    Button buttonAddUpdate;
+    Button startTime;
 
     List<Hero> heroList;
     String atsList;
@@ -54,7 +54,14 @@ public class user extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        userToken=MainActivity.userToken;
+
+        startTime=findViewById(R.id.startButton);
+        startTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
 
     }
     private void changeLastTimeStarted(){
@@ -314,7 +321,7 @@ public class user extends AppCompatActivity {
 //                    editTextRealname.setText(hero.getRealname());
                     ratingBar.setRating(hero.getRating());
                     spinnerTeam.setSelection(((ArrayAdapter<String>) spinnerTeam.getAdapter()).getPosition(hero.getTeamaffiliation()));
-                    buttonAddUpdate.setText("Update");
+                    startTime.setText("Update");
                 }
             });
 
