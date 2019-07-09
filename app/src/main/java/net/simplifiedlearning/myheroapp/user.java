@@ -68,6 +68,10 @@ public class user extends AppCompatActivity {
                         //atvaizduoti
 
                     }
+                    else{
+                        //nusiust i db kad stabd
+                        //pakeisti i false
+                    }
                 }
             }
         });
