@@ -83,6 +83,7 @@ public class user extends AppCompatActivity {
         this.timeTextVariable = findViewById(R.id.timeText);
         startTime=findViewById(R.id.startButton);
         //===========tikrinama ar pradetas buvo===========
+        inProgress=true;
         HashMap<String, String> params = new HashMap<>();
         params.put("login_token", userToken);
 
@@ -171,6 +172,7 @@ public class user extends AppCompatActivity {
     private void beginTimerNotFresh(){
         firstTimeStamp = new Date();
         secondTimeStamp.setTime(firstTimeStamp.getTime() - (timeDiff*1000));
+        date1Variable.setText(dateFormat.format(this.firstTimeStamp));
         RefreshTime();
     }
 
@@ -341,6 +343,9 @@ private class PerformNetworkRequestCheck1 extends AsyncTask<Void, Void, String> 
             user.PerformNetworkRequestCheck2 todayshours = new user.PerformNetworkRequestCheck2(Api.URL_CHANGE_LASTTIMEENDED, params, CODE_POST_REQUEST);
             todayshours.execute();
         }
+        else{
+            inProgress =false;
+        }
 
     }
 
@@ -426,6 +431,7 @@ private class PerformNetworkRequestCheck3 extends AsyncTask<Void, Void, String> 
         params.put("login_token", userToken);
         user.PerformNetworkRequestCheck4 todayshours = new user.PerformNetworkRequestCheck4(Api.URL_GET_TODAYSWORKTIME, params, CODE_POST_REQUEST);
         todayshours.execute();
+
     }
 
     @Override
@@ -466,6 +472,7 @@ private class PerformNetworkRequestCheck4 extends AsyncTask<Void, Void, String> 
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         timeDiff= Long.parseLong(s);
+        inProgress=false;
         beginTimerNotFresh();
 
     }
