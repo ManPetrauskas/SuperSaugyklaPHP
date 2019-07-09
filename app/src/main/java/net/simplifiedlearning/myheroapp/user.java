@@ -47,7 +47,7 @@ public class user extends AppCompatActivity {
     List<Hero> heroList;
     String atsList;
     String userToken;
-
+    boolean inProgress = false;
     boolean isUpdating = false;
 
     @Override
@@ -55,6 +55,7 @@ public class user extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         userToken=MainActivity.userToken;
+
     }
     private void changeLastTimeStarted(){
         HashMap<String, String> params = new HashMap<>();
