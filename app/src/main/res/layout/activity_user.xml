@@ -15,7 +15,7 @@
         android:layout_marginTop="150dp"
         android:textSize="20dp"
         android:fontFamily="Arial"
-        android:text="Time" />
+        android:text="Time passed" />
 
     <TextView
         android:id="@+id/date1Text"
@@ -26,7 +26,7 @@
         android:layout_marginTop="60dp"
         android:textSize="25dp"
         android:fontFamily="Arial"
-        android:text="Date 1" />
+        android:text="Starting date" />
 
     <TextView
         android:id="@+id/textExplain1"

@@ -23,6 +23,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -36,26 +39,48 @@ public class user extends AppCompatActivity {
     private static final int CODE_POST_REQUEST = 1025;
     private static final int CODE_GET_QUERY = 1026;
 
-    EditText  editTextName;
+    //EditText  editTextName;
     //editTextHeroId,, editTextRealname
     RatingBar ratingBar;
+
     Spinner spinnerTeam;
+
     ProgressBar progressBar;
+
     ListView listView;
+
     Button startTime;
 
+    Thread thread;
+
+    Date firstTimeStamp;
+    Date secondTimeStamp;
+
+    long timeDiff;
+
+    private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+    TextView date1Variable;
+    TextView date2Variable;
+    TextView timeTextVariable;
+
     List<Hero> heroList;
+
     String atsList;
     String userToken;
+
     boolean inProgress = false;
     boolean timerRuning = false;
     boolean isUpdating = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-
+        this.date1Variable = findViewById(R.id.date1Text);
+        this.date2Variable = findViewById(R.id.date2Text);
+        this.timeTextVariable = findViewById(R.id.timeText);
         startTime=findViewById(R.id.startButton);
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +101,75 @@ public class user extends AppCompatActivity {
             }
         });
 
+        this.thread = new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    while (!thread.isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (timerRuning) {
+                                    RefreshTime();
+                                }
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+
+        thread.start();
+
+    }
+    private void startTimer() {
+        this.startTime.setText("Stop Timer");
+        timerRuning = true;
+        //===============Timerio pradejimas bazeje ir boolean pakeisti=====
+        beginTimer();
+        //=======================================================================
+        this.firstTimeStamp = new Date();
+        this.date1Variable.setText(dateFormat.format(this.firstTimeStamp));
+        RefreshTime();
+    }
+    private void RefreshTime() {
+        //================Pasiekti Total time===================================================
+        //======================================================================================
+        this.secondTimeStamp = new Date();
+        this.date2Variable.setText(dateFormat.format(this.secondTimeStamp));
+        this.timeDiff = this.secondTimeStamp.getTime() - this.firstTimeStamp.getTime();
+        long diffSeconds = this.timeDiff / 1000 % 60;
+        long diffMinutes = this.timeDiff / (60 * 1000) % 60;
+        long diffHours = this.timeDiff / (60 * 60 * 1000);
+        this.timeTextVariable.setText("You are " + diffHours + " h " + diffMinutes + " min " + diffSeconds + " sec  working");
+    }
+    private void stopTimer(){
+        //===============Bazeje timerio uzbaigimas ir total hours suskaiciavimas=======================
+
+//        System.out.println(sqlGetBoolean("gvdsfgbxcg41"));
+        endTimer();
+        //============================================================================================
+        date1Variable.setText("Starting date");
+        timeTextVariable.setText("Time passed");
+        startTime.setText("Start Timer");
+        timerRuning = false;
+    }
+
+
+    private void beginTimer(){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login_token", userToken);
+        user.PerformNetworkRequestBegining1 todayshours = new user.PerformNetworkRequestBegining1(Api.URL_CHANGE_LASTTIMESTARTED, params, CODE_POST_REQUEST);
+        todayshours.execute();
+    }
+    private void endTimer(){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login_token", userToken);
+        user.PerformNetworkRequestEnd1 todayshours = new user.PerformNetworkRequestEnd1(Api.URL_CHANGE_LASTTIMESTARTED, params, CODE_POST_REQUEST);
+        todayshours.execute();
     }
     private void changeLastTimeStarted(){
         HashMap<String, String> params = new HashMap<>();
@@ -199,7 +293,176 @@ public class user extends AppCompatActivity {
         user.HeroAdapter adapter = new user.HeroAdapter(heroList);
         listView.setAdapter(adapter);
     }
+//================================Custom tasks============================
+private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, String> {
+    String url;
+    HashMap<String, String> params;
+    int requestCode;
 
+    PerformNetworkRequestBegining1(String url, HashMap<String, String> params, int requestCode) {
+        this.url = url;
+        this.params = params;
+        this.requestCode = requestCode;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login_token", userToken);
+
+        user.PerformNetworkRequestBegining2 request = new user.PerformNetworkRequestBegining2(Api.URL_CHANGE_BOOLEANTOTRUE, params, CODE_POST_REQUEST);
+        request.execute();
+    }
+
+    @Override
+    protected String doInBackground(Void... voids) {
+        RequestHandler requestHandler = new RequestHandler();
+
+        if (requestCode == CODE_POST_REQUEST)
+            return requestHandler.sendPostRequest(url, params);
+
+
+        if (requestCode == CODE_GET_REQUEST)
+            return requestHandler.sendGetRequest(url);
+
+        if (requestCode == CODE_GET_QUERY)
+            return requestHandler.sendUpdateRequest(url);
+
+        return null;
+    }
+}
+    private class PerformNetworkRequestBegining2 extends AsyncTask<Void, Void, String> {
+        String url;
+        HashMap<String, String> params;
+        int requestCode;
+
+        PerformNetworkRequestBegining2(String url, HashMap<String, String> params, int requestCode) {
+            this.url = url;
+            this.params = params;
+            this.requestCode = requestCode;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestHandler requestHandler = new RequestHandler();
+
+            if (requestCode == CODE_POST_REQUEST)
+                return requestHandler.sendPostRequest(url, params);
+
+
+            if (requestCode == CODE_GET_REQUEST)
+                return requestHandler.sendGetRequest(url);
+
+            if (requestCode == CODE_GET_QUERY)
+                return requestHandler.sendUpdateRequest(url);
+
+            return null;
+        }
+    }
+    private class PerformNetworkRequestEnd1 extends AsyncTask<Void, Void, String> {
+        String url;
+        HashMap<String, String> params;
+        int requestCode;
+
+        PerformNetworkRequestEnd1(String url, HashMap<String, String> params, int requestCode) {
+            this.url = url;
+            this.params = params;
+            this.requestCode = requestCode;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            HashMap<String, String> params = new HashMap<>();
+            params.put("login_token", userToken);
+
+            user.PerformNetworkRequestEnd2 request = new user.PerformNetworkRequestEnd2(Api.URL_CHANGE_BOOLEANTOFALSE, params, CODE_POST_REQUEST);
+            request.execute();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestHandler requestHandler = new RequestHandler();
+
+            if (requestCode == CODE_POST_REQUEST)
+                return requestHandler.sendPostRequest(url, params);
+
+
+            if (requestCode == CODE_GET_REQUEST)
+                return requestHandler.sendGetRequest(url);
+
+            if (requestCode == CODE_GET_QUERY)
+                return requestHandler.sendUpdateRequest(url);
+
+            return null;
+        }
+    }
+    private class PerformNetworkRequestEnd2 extends AsyncTask<Void, Void, String> {
+        String url;
+        HashMap<String, String> params;
+        int requestCode;
+
+        PerformNetworkRequestEnd2(String url, HashMap<String, String> params, int requestCode) {
+            this.url = url;
+            this.params = params;
+            this.requestCode = requestCode;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestHandler requestHandler = new RequestHandler();
+
+            if (requestCode == CODE_POST_REQUEST)
+                return requestHandler.sendPostRequest(url, params);
+
+
+            if (requestCode == CODE_GET_REQUEST)
+                return requestHandler.sendGetRequest(url);
+
+            if (requestCode == CODE_GET_QUERY)
+                return requestHandler.sendUpdateRequest(url);
+
+            return null;
+        }
+    }
+//    ============================================================================
     private class PerformNetworkRequestClone extends AsyncTask<Void, Void, String> {
         String url;
         HashMap<String, String> params;
@@ -330,7 +593,7 @@ public class user extends AppCompatActivity {
                 public void onClick(View view) {
                     isUpdating = true;
 //                    editTextHeroId.setText(String.valueOf(hero.getId()));
-                    editTextName.setText(hero.getName());
+//                    editTextName.setText(hero.getName());
 //                    editTextRealname.setText(hero.getRealname());
                     ratingBar.setRating(hero.getRating());
                     spinnerTeam.setSelection(((ArrayAdapter<String>) spinnerTeam.getAdapter()).getPosition(hero.getTeamaffiliation()));
