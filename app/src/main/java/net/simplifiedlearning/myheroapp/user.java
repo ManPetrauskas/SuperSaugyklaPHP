@@ -91,11 +91,13 @@ public class user extends AppCompatActivity {
                         //nusiusti kad pradejo i true
                         //sukurti new date
                         //atvaizduoti
+                        startTimer();
 
                     }
                     else{
                         //nusiust i db kad stabd
                         //pakeisti i false
+                        stopTimer();
                     }
                 }
             }
@@ -129,6 +131,7 @@ public class user extends AppCompatActivity {
         this.startTime.setText("Stop Timer");
         timerRuning = true;
         //===============Timerio pradejimas bazeje ir boolean pakeisti=====
+        inProgress=true;
         beginTimer();
         //=======================================================================
         this.firstTimeStamp = new Date();
@@ -150,6 +153,7 @@ public class user extends AppCompatActivity {
         //===============Bazeje timerio uzbaigimas ir total hours suskaiciavimas=======================
 
 //        System.out.println(sqlGetBoolean("gvdsfgbxcg41"));
+        inProgress=true;
         endTimer();
         //============================================================================================
         date1Variable.setText("Starting date");
@@ -358,6 +362,7 @@ private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, Strin
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            inProgress=false;
 
         }
 
@@ -442,6 +447,7 @@ private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, Strin
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            inProgress=false;
 
         }
 
