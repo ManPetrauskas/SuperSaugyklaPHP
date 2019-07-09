@@ -48,6 +48,7 @@ public class user extends AppCompatActivity {
     String atsList;
     String userToken;
     boolean inProgress = false;
+    boolean timerRuning = false;
     boolean isUpdating = false;
 
     @Override
@@ -59,7 +60,15 @@ public class user extends AppCompatActivity {
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                if(!inProgress){
+                    if(!timerRuning){
+                        //nusiust i db kad pradetu
+                        //nusiusti kad pradejo i true
+                        //sukurti new date
+                        //atvaizduoti
+
+                    }
+                }
             }
         });
 
