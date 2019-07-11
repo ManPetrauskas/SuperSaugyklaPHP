@@ -172,13 +172,13 @@ public class user extends AppCompatActivity {
     }
     private void beginTimerNotFresh(){
         firstTimeStamp = new Date();
-
-        long diff = firstTimeStamp.getTime();
-
-        long diffSeconds = diff / 1000 % 60;
-        long diffMinutes = diff / (60 * 1000) % 60;
-        long diffHours = diff / (60 * 60 * 1000) % 24;
-        long diffDays = diff / (24 * 60 * 60 * 1000);
+//
+//        long diff = firstTimeStamp.getTime();
+//
+//        long diffSeconds = diff / 1000 % 60;
+//        long diffMinutes = diff / (60 * 1000) % 60;
+//        long diffHours = diff / (60 * 60 * 1000) % 24;
+//        long diffDays = diff / (24 * 60 * 60 * 1000);
         secondTimeStamp.setSeconds((int) (firstTimeStamp.getSeconds() - (timeDiff*1000)));
         date1Variable.setText(dateFormat.format(this.firstTimeStamp));
         RefreshTime();
@@ -649,47 +649,6 @@ private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, Strin
         int requestCode;
 
         PerformNetworkRequestEnd2(String url, HashMap<String, String> params, int requestCode) {
-            this.url = url;
-            this.params = params;
-            this.requestCode = requestCode;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-//            progressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            inProgress=false;
-
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            RequestHandler requestHandler = new RequestHandler();
-
-            if (requestCode == CODE_POST_REQUEST)
-                return requestHandler.sendPostRequest(url, params);
-
-
-            if (requestCode == CODE_GET_REQUEST)
-                return requestHandler.sendGetRequest(url);
-
-            if (requestCode == CODE_GET_QUERY)
-                return requestHandler.sendUpdateRequest(url);
-
-            return null;
-        }
-    }
-    private class PerformNetworkRequestEnd3 extends AsyncTask<Void, Void, String> {
-        String url;
-        HashMap<String, String> params;
-        int requestCode;
-
-        PerformNetworkRequestEnd3(String url, HashMap<String, String> params, int requestCode) {
             this.url = url;
             this.params = params;
             this.requestCode = requestCode;
