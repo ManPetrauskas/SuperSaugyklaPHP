@@ -172,7 +172,7 @@ public class user extends AppCompatActivity {
     }
     private void beginTimerNotFresh(){
         firstTimeStamp = new Date();
-        
+
         long diff = firstTimeStamp.getTime();
 
         long diffSeconds = diff / 1000 % 60;
@@ -649,6 +649,47 @@ private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, Strin
         int requestCode;
 
         PerformNetworkRequestEnd2(String url, HashMap<String, String> params, int requestCode) {
+            this.url = url;
+            this.params = params;
+            this.requestCode = requestCode;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            inProgress=false;
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestHandler requestHandler = new RequestHandler();
+
+            if (requestCode == CODE_POST_REQUEST)
+                return requestHandler.sendPostRequest(url, params);
+
+
+            if (requestCode == CODE_GET_REQUEST)
+                return requestHandler.sendGetRequest(url);
+
+            if (requestCode == CODE_GET_QUERY)
+                return requestHandler.sendUpdateRequest(url);
+
+            return null;
+        }
+    }
+    private class PerformNetworkRequestEnd3 extends AsyncTask<Void, Void, String> {
+        String url;
+        HashMap<String, String> params;
+        int requestCode;
+
+        PerformNetworkRequestEnd3(String url, HashMap<String, String> params, int requestCode) {
             this.url = url;
             this.params = params;
             this.requestCode = requestCode;
