@@ -88,15 +88,16 @@ public class MainActivity extends AppCompatActivity {
                 //changeLastTimeEnded();
 
 
-//                // ============ To open user=============(comment everything below before testing any other method)
-//                String login_token = editTextName.getText().toString().trim();
-//                HashMap<String, String> params = new HashMap<>();
-//                params.put("login_token", login_token);
-//
-//                PerformNetworkRequestToOpenUser request = new PerformNetworkRequestToOpenUser(Api.URL_GET_WORKERBOOLEAN + login_token, params, CODE_POST_REQUEST);
-//                request.execute();
+                // ============ To open user=============(comment everything below before testing any other method)
+                String login_token = editTextName.getText().toString().trim();
+                HashMap<String, String> params = new HashMap<>();
+                params.put("login_token", login_token);
+
+                PerformNetworkRequestToOpenUser request = new PerformNetworkRequestToOpenUser(Api.URL_GET_WORKERBOOLEAN + login_token, params, CODE_POST_REQUEST);
+                request.execute();
 //                //=========================================
-                getTodaysWorktime();
+//                getTodaysWorktime();
+
             }
         });
         //readHeroes();

@@ -79,6 +79,7 @@ public class user extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         this.date1Variable = findViewById(R.id.date1Text);
+        userToken = MainActivity.userToken;
         this.date2Variable = findViewById(R.id.date2Text);
         this.timeTextVariable = findViewById(R.id.timeText);
         startTime=findViewById(R.id.startButton);
@@ -171,7 +172,7 @@ public class user extends AppCompatActivity {
     }
     private void beginTimerNotFresh(){
         firstTimeStamp = new Date();
-        secondTimeStamp.setTime(firstTimeStamp.getTime() - (timeDiff*1000));
+        secondTimeStamp.setSeconds((int) (firstTimeStamp.getSeconds() - (timeDiff*1000)));
         date1Variable.setText(dateFormat.format(this.firstTimeStamp));
         RefreshTime();
     }
@@ -325,12 +326,17 @@ private class PerformNetworkRequestCheck1 extends AsyncTask<Void, Void, String> 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressBar.setVisibility(View.VISIBLE);
+      //  progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        atsList = "";
+        Matcher m = Pattern.compile("[0-9]").matcher(s);
+        while (m.find()) {
+            atsList+=(m.group());
+        }
         if(atsList.equals("1")){
             //===========================================
             //update time 2                         Done
@@ -380,7 +386,7 @@ private class PerformNetworkRequestCheck2 extends AsyncTask<Void, Void, String> 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressBar.setVisibility(View.VISIBLE);
+       // progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -421,7 +427,7 @@ private class PerformNetworkRequestCheck3 extends AsyncTask<Void, Void, String> 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressBar.setVisibility(View.VISIBLE);
+       // progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -465,13 +471,18 @@ private class PerformNetworkRequestCheck4 extends AsyncTask<Void, Void, String> 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressBar.setVisibility(View.VISIBLE);
+       // progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        timeDiff= Long.parseLong(s);
+        atsList = "";
+        Matcher m = Pattern.compile("[0-9]").matcher(s);
+        while (m.find()) {
+            atsList+=(m.group());
+        }
+        timeDiff= Long.parseLong(atsList);
         inProgress=false;
         beginTimerNotFresh();
 
@@ -510,7 +521,7 @@ private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, Strin
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressBar.setVisibility(View.VISIBLE);
+//        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -554,7 +565,7 @@ private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, Strin
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
+//            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -595,7 +606,7 @@ private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, Strin
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
+//            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -639,7 +650,7 @@ private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, Strin
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
+//            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -681,18 +692,19 @@ private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, Strin
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
+//            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            atsList = "";
             Matcher m = Pattern.compile("[0-9]").matcher(s);
             while (m.find()) {
                 atsList+=(m.group());
             }
             System.out.println(atsList);
-            progressBar.setVisibility(GONE);
+//            progressBar.setVisibility(GONE);
             try {
                 JSONObject object = new JSONObject(s);
                 if (!object.getBoolean("error")) {
@@ -736,13 +748,13 @@ private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, Strin
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
+//            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            progressBar.setVisibility(GONE);
+//            progressBar.setVisibility(GONE);
             try {
                 JSONObject object = new JSONObject(s);
                 if (!object.getBoolean("error")) {
