@@ -172,14 +172,13 @@ public class user extends AppCompatActivity {
     }
     private void beginTimerNotFresh(){
         firstTimeStamp = new Date();
-//
 //        long diff = firstTimeStamp.getTime();
-//
-//        long diffSeconds = diff / 1000 % 60;
-//        long diffMinutes = diff / (60 * 1000) % 60;
-//        long diffHours = diff / (60 * 60 * 1000) % 24;
-//        long diffDays = diff / (24 * 60 * 60 * 1000);
-        secondTimeStamp.setSeconds((int) (firstTimeStamp.getSeconds() - (timeDiff*1000)));
+//        long diffSeconds = this.timeDiff / 1000 % 60;
+//        long diffMinutes = this.timeDiff / (60 * 1000) % 60;
+//        long diffHours = this.timeDiff / (60 * 60 * 1000);
+        long what=firstTimeStamp.getTime();
+        long nowTime = what - this.timeDiff *1000;
+        firstTimeStamp.setTime(nowTime);
         date1Variable.setText(dateFormat.format(this.firstTimeStamp));
         RefreshTime();
     }
