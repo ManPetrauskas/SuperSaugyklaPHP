@@ -180,6 +180,7 @@ public class user extends AppCompatActivity {
         long nowTime = what - this.timeDiff *1000;
         firstTimeStamp.setTime(nowTime);
         date1Variable.setText(dateFormat.format(this.firstTimeStamp));
+        timerRuning=true;
         RefreshTime();
     }
 
