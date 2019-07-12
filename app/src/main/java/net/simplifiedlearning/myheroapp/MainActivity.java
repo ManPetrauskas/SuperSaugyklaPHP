@@ -282,6 +282,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            atsList = "";
             Matcher m = Pattern.compile("[0-9]").matcher(s);
             while (m.find()) {
                 atsList+=(m.group());
@@ -293,6 +294,7 @@ public class MainActivity extends AppCompatActivity {
             else{
                 System.out.println(atsList+" is not 0 or 1... Such token doesnt exist ?");
             }
+            progressBar.setVisibility(View.INVISIBLE);
         }
 
         @Override
