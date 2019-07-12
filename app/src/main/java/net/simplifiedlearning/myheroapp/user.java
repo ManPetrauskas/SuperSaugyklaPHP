@@ -159,7 +159,6 @@ public class user extends AppCompatActivity {
         this.timeTextVariable.setText("You are " + diffHours + " h " + diffMinutes + " min " + diffSeconds + " sec  working");
     }
     private void stopTimer(){
-        this.startTime.setText("Stop Timer");
         //===============Bazeje timerio uzbaigimas ir total hours suskaiciavimas=======================
 
 //        System.out.println(sqlGetBoolean("gvdsfgbxcg41"));
@@ -172,6 +171,7 @@ public class user extends AppCompatActivity {
         timerRuning = false;
     }
     private void beginTimerNotFresh(){
+        this.startTime.setText("Stop Timer");
         firstTimeStamp = new Date();
 //        long diff = firstTimeStamp.getTime();
 //        long diffSeconds = this.timeDiff / 1000 % 60;
