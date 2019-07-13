@@ -581,10 +581,11 @@ private class PerformNetworkRequestBegining2 extends AsyncTask<Void, Void, Strin
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        HashMap<String, String> params = new HashMap<>();
-        params.put("login_token", userToken);
-        user.PerformNetworkRequestBegining3 todayshours = new user.PerformNetworkRequestBegining3(Api.URL_COPY_WORKER, params, CODE_POST_REQUEST);
-        todayshours.execute();
+        inProgress = false;
+//        HashMap<String, String> params = new HashMap<>();
+//        params.put("login_token", userToken);
+//        user.PerformNetworkRequestBegining3 todayshours = new user.PerformNetworkRequestBegining3(Api.URL_COPY_WORKER, params, CODE_POST_REQUEST);
+//        todayshours.execute();
 
     }
 
@@ -605,47 +606,47 @@ private class PerformNetworkRequestBegining2 extends AsyncTask<Void, Void, Strin
         return null;
     }
 }
-    private class PerformNetworkRequestBegining3 extends AsyncTask<Void, Void, String> {
-        String url;
-        HashMap<String, String> params;
-        int requestCode;
-
-        PerformNetworkRequestBegining3(String url, HashMap<String, String> params, int requestCode) {
-            this.url = url;
-            this.params = params;
-            this.requestCode = requestCode;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-//            progressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            inProgress = false;
-
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            RequestHandler requestHandler = new RequestHandler();
-
-            if (requestCode == CODE_POST_REQUEST)
-                return requestHandler.sendPostRequest(url, params);
-
-
-            if (requestCode == CODE_GET_REQUEST)
-                return requestHandler.sendGetRequest(url);
-
-            if (requestCode == CODE_GET_QUERY)
-                return requestHandler.sendUpdateRequest(url);
-
-            return null;
-        }
-    }
+//    private class PerformNetworkRequestBegining3 extends AsyncTask<Void, Void, String> {
+//        String url;
+//        HashMap<String, String> params;
+//        int requestCode;
+//
+//        PerformNetworkRequestBegining3(String url, HashMap<String, String> params, int requestCode) {
+//            this.url = url;
+//            this.params = params;
+//            this.requestCode = requestCode;
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+////            progressBar.setVisibility(View.VISIBLE);
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            super.onPostExecute(s);
+//            inProgress = false;
+//
+//        }
+//
+//        @Override
+//        protected String doInBackground(Void... voids) {
+//            RequestHandler requestHandler = new RequestHandler();
+//
+//            if (requestCode == CODE_POST_REQUEST)
+//                return requestHandler.sendPostRequest(url, params);
+//
+//
+//            if (requestCode == CODE_GET_REQUEST)
+//                return requestHandler.sendGetRequest(url);
+//
+//            if (requestCode == CODE_GET_QUERY)
+//                return requestHandler.sendUpdateRequest(url);
+//
+//            return null;
+//        }
+//    }
 private class PerformNetworkRequestEnd1 extends AsyncTask<Void, Void, String> {
     String url;
     HashMap<String, String> params;
