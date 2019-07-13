@@ -20,5 +20,6 @@ public class Api {
     public static final String URL_CHANGE_BOOLEANTOFALSE = ROOT_URL + "changebooleantofalse";
     public static final String URL_CHANGE_LASTTIMESTARTED = ROOT_URL + "changelasttimestarted";
     public static final String URL_CHANGE_LASTTIMEENDED = ROOT_URL + "changelasttimeended";
+    public static final String URL_COPY_WORKER = ROOT_URL + "copyworker";
 
 }

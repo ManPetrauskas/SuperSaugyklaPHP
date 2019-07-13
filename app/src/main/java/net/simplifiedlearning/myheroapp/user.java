@@ -190,7 +190,7 @@ public class user extends AppCompatActivity {
     private void endTimer(){
         HashMap<String, String> params = new HashMap<>();
         params.put("login_token", userToken);
-        user.PerformNetworkRequestEnd1 todayshours = new user.PerformNetworkRequestEnd1(Api.URL_CHANGE_LASTTIMESTARTED, params, CODE_POST_REQUEST);
+        user.PerformNetworkRequestEnd1 todayshours = new user.PerformNetworkRequestEnd1(Api.URL_CHANGE_LASTTIMEENDED, params, CODE_POST_REQUEST);
         todayshours.execute();
     }
     private void changeLastTimeStarted(){
