@@ -148,6 +148,12 @@ public class MainActivity extends AppCompatActivity {
         PerformNetworkRequestClone todayshours = new PerformNetworkRequestClone(Api.URL_CHANGE_LASTTIMEENDED, params, CODE_POST_REQUEST);
         todayshours.execute();
     }
+    private void copyToOtherTable(){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login_token", userToken);
+        PerformNetworkRequestClone todayshours = new PerformNetworkRequestClone(Api.URL_COPY_WORKER, params, CODE_POST_REQUEST);
+        todayshours.execute();
+    }
 
     private void readWorkers() {
         PerformNetworkRequestClone request = new PerformNetworkRequestClone(Api.URL_READ_WORKERS, null, CODE_GET_QUERY);

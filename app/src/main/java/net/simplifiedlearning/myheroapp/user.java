@@ -199,6 +199,12 @@ public class user extends AppCompatActivity {
         user.PerformNetworkRequestClone todayshours = new user.PerformNetworkRequestClone(Api.URL_CHANGE_LASTTIMESTARTED, params, CODE_POST_REQUEST);
         todayshours.execute();
     }
+    private void copyToOtherTable(){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login_token", userToken);
+        user.PerformNetworkRequestClone todayshours = new user.PerformNetworkRequestClone(Api.URL_COPY_WORKER, params, CODE_POST_REQUEST);
+        todayshours.execute();
+    }
 
     private void changeLastTimeEnded(){
         HashMap<String, String> params = new HashMap<>();
@@ -555,12 +561,56 @@ private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, Strin
         return null;
     }
 }
-    private class PerformNetworkRequestBegining2 extends AsyncTask<Void, Void, String> {
+private class PerformNetworkRequestBegining2 extends AsyncTask<Void, Void, String> {
+    String url;
+    HashMap<String, String> params;
+    int requestCode;
+
+    PerformNetworkRequestBegining2(String url, HashMap<String, String> params, int requestCode) {
+        this.url = url;
+        this.params = params;
+        this.requestCode = requestCode;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+//            progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login_token", userToken);
+        user.PerformNetworkRequestBegining3 todayshours = new user.PerformNetworkRequestBegining3(Api.URL_COPY_WORKER, params, CODE_POST_REQUEST);
+        todayshours.execute();
+
+    }
+
+    @Override
+    protected String doInBackground(Void... voids) {
+        RequestHandler requestHandler = new RequestHandler();
+
+        if (requestCode == CODE_POST_REQUEST)
+            return requestHandler.sendPostRequest(url, params);
+
+
+        if (requestCode == CODE_GET_REQUEST)
+            return requestHandler.sendGetRequest(url);
+
+        if (requestCode == CODE_GET_QUERY)
+            return requestHandler.sendUpdateRequest(url);
+
+        return null;
+    }
+}
+    private class PerformNetworkRequestBegining3 extends AsyncTask<Void, Void, String> {
         String url;
         HashMap<String, String> params;
         int requestCode;
 
-        PerformNetworkRequestBegining2(String url, HashMap<String, String> params, int requestCode) {
+        PerformNetworkRequestBegining3(String url, HashMap<String, String> params, int requestCode) {
             this.url = url;
             this.params = params;
             this.requestCode = requestCode;
@@ -575,7 +625,7 @@ private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, Strin
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            inProgress=false;
+            inProgress = false;
 
         }
 
@@ -596,50 +646,50 @@ private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, Strin
             return null;
         }
     }
-    private class PerformNetworkRequestEnd1 extends AsyncTask<Void, Void, String> {
-        String url;
-        HashMap<String, String> params;
-        int requestCode;
+private class PerformNetworkRequestEnd1 extends AsyncTask<Void, Void, String> {
+    String url;
+    HashMap<String, String> params;
+    int requestCode;
 
-        PerformNetworkRequestEnd1(String url, HashMap<String, String> params, int requestCode) {
-            this.url = url;
-            this.params = params;
-            this.requestCode = requestCode;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-//            progressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            HashMap<String, String> params = new HashMap<>();
-            params.put("login_token", userToken);
-
-            user.PerformNetworkRequestEnd2 request = new user.PerformNetworkRequestEnd2(Api.URL_CHANGE_BOOLEANTOFALSE, params, CODE_POST_REQUEST);
-            request.execute();
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            RequestHandler requestHandler = new RequestHandler();
-
-            if (requestCode == CODE_POST_REQUEST)
-                return requestHandler.sendPostRequest(url, params);
-
-
-            if (requestCode == CODE_GET_REQUEST)
-                return requestHandler.sendGetRequest(url);
-
-            if (requestCode == CODE_GET_QUERY)
-                return requestHandler.sendUpdateRequest(url);
-
-            return null;
-        }
+    PerformNetworkRequestEnd1(String url, HashMap<String, String> params, int requestCode) {
+        this.url = url;
+        this.params = params;
+        this.requestCode = requestCode;
     }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+//            progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("login_token", userToken);
+
+        user.PerformNetworkRequestEnd2 request = new user.PerformNetworkRequestEnd2(Api.URL_CHANGE_BOOLEANTOFALSE, params, CODE_POST_REQUEST);
+        request.execute();
+    }
+
+    @Override
+    protected String doInBackground(Void... voids) {
+        RequestHandler requestHandler = new RequestHandler();
+
+        if (requestCode == CODE_POST_REQUEST)
+            return requestHandler.sendPostRequest(url, params);
+
+
+        if (requestCode == CODE_GET_REQUEST)
+            return requestHandler.sendGetRequest(url);
+
+        if (requestCode == CODE_GET_QUERY)
+            return requestHandler.sendUpdateRequest(url);
+
+        return null;
+    }
+}
     private class PerformNetworkRequestEnd2 extends AsyncTask<Void, Void, String> {
         String url;
         HashMap<String, String> params;
@@ -689,6 +739,50 @@ private class PerformNetworkRequestBegining1 extends AsyncTask<Void, Void, Strin
         int requestCode;
 
         PerformNetworkRequestEnd3(String url, HashMap<String, String> params, int requestCode) {
+            this.url = url;
+            this.params = params;
+            this.requestCode = requestCode;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            HashMap<String, String> params = new HashMap<>();
+            params.put("login_token", userToken);
+            user.PerformNetworkRequestEnd4 todayshours = new user.PerformNetworkRequestEnd4(Api.URL_COPY_WORKER, params, CODE_POST_REQUEST);
+            todayshours.execute();
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestHandler requestHandler = new RequestHandler();
+
+            if (requestCode == CODE_POST_REQUEST)
+                return requestHandler.sendPostRequest(url, params);
+
+
+            if (requestCode == CODE_GET_REQUEST)
+                return requestHandler.sendGetRequest(url);
+
+            if (requestCode == CODE_GET_QUERY)
+                return requestHandler.sendUpdateRequest(url);
+
+            return null;
+        }
+    }
+    private class PerformNetworkRequestEnd4 extends AsyncTask<Void, Void, String> {
+        String url;
+        HashMap<String, String> params;
+        int requestCode;
+
+        PerformNetworkRequestEnd4(String url, HashMap<String, String> params, int requestCode) {
             this.url = url;
             this.params = params;
             this.requestCode = requestCode;
