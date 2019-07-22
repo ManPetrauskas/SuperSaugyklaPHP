@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     String atsList;
     public static String userToken;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
