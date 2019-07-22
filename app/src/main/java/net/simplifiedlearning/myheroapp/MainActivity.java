@@ -45,11 +45,9 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     Button buttonAddUpdate;
 
-    List<Hero> heroList;
     String atsList;
     public static String userToken;
-
-    boolean isUpdating = false;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         listView = (ListView) findViewById(R.id.listViewHeroes);
 
-        heroList = new ArrayList<>();
 
 
         buttonAddUpdate.setOnClickListener(new View.OnClickListener() {
