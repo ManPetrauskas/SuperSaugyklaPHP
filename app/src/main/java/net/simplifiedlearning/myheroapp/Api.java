@@ -6,7 +6,7 @@ package net.simplifiedlearning.myheroapp;
 
 public class Api {
 
-    private static final String ROOT_URL = "http://192.168.0.106/HeroApi/v1/Api.php?apicall=";
+    private static final String ROOT_URL = "http://earwiggy-injury.000webhostapp.com/HeroApi/v1/Api.php?apicall=";
 
     public static final String URL_GET_TODAYSWORKTIME = ROOT_URL + "gettodaysworktime";
     public static final String URL_UPDATE_TODAYSWORKTIME = ROOT_URL + "updatetodaysworktime";
