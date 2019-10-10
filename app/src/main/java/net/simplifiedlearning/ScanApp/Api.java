@@ -1,4 +1,4 @@
-package net.simplifiedlearning.myheroapp;
+package net.simplifiedlearning.ScanApp;
 
 /**
  * Created by Belal on 9/9/2017.

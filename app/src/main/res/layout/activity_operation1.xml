@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Operation1">
+
+    <TextView
+        android:id="@+id/titleTextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="44dp"
+        android:text="Operation 1"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:id="@+id/titleTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="80dp"
+        android:text="Barcode:"
+        android:textSize="30dp" />
+    <TextView
+        android:id="@+id/barcodeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="128dp"
+        android:text="(Code)"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:id="@+id/inputEditText1"
+        android:layout_width="274dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="170dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Entry input" />
+    <EditText
+        android:id="@+id/inputEditText2"
+        android:layout_width="274dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Entry input" />
+    <EditText
+        android:id="@+id/inputEditText3"
+        android:layout_width="274dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="330dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Entry input" />
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="126dp"
+        android:layout_height="63dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="240dp"
+        android:text="Cancel" />
+    <Button
+        android:id="@+id/okButton"
+        android:layout_width="126dp"
+        android:layout_height="63dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="50dp"
+        android:text="OK" />
+</RelativeLayout>

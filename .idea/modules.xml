@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SuperSaugyklaPHP.iml" filepath="$PROJECT_DIR$/SuperSaugyklaPHP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ScannerApplication.iml" filepath="$PROJECT_DIR$/ScannerApplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -1,4 +1,4 @@
-package net.simplifiedlearning.myheroapp;
+package net.simplifiedlearning.ScanApp;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,9 +14,7 @@ import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
-/**
- * Created by Belal on 9/9/2017.
- */
+
 public class RequestHandler {
 
     //Method to send httpPostRequest
